@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Microsoft Graph SPA</title>
+</head>
+
+<body>
+    <main id="main-container" role="main" class="container">
+        <!-- MSAL -->
+        <script src="https://alcdn.msauth.net/browser/2.1.0/js/msal-browser.min.js"
+            integrity="sha384-EmYPwkfj+VVmL1brMS1h6jUztl4QMS8Qq8xlZNgIT/luzg7MAzDVrRa2JxbNmk/e"
+            crossorigin="anonymous"></script>
+
+        <!-- Graph SDK -->
+        <script src="https://cdn.jsdelivr.net/npm/@microsoft/microsoft-graph-client/lib/graph-js-sdk.js"></script>
+        <!-- auth -->
+        <script>
+
+            function signIn() {
+                // TEMPORARY
+                showMe({ name: 'Megan Bowen', userName: 'meganb@contoso.com' });
+            }
+        </script>
+        <!--show me-->
+        <script>
+            function showMe(user) {
+                const mainContainer = document.getElementById('main-container');
+
+                if (user) {
+                    // Welcome the user by name
+                    var welcomeMessage = document.createElement('h4');
+                    welcomeMessage.textContent = `Welcome ${user.name}!`;
+
+                    mainContainer.innerHTML = '';
+                    mainContainer.appendChild(welcomeMessage);
+                }
+                else {
+                    // Show a sign in button 
+                    var signInButton = document.createElement('button')
+                    signInButton.innerHTML = "Click here to sign in";
+                    signInButton.setAttribute('onclick', 'signIn();')
+                    mainContainer.appendChild(signInButton);
+                }
+            }
+            showMe()
+        </script>
+</body>
+
+</html>
