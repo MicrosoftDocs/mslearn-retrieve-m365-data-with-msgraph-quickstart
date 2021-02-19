@@ -17,12 +17,12 @@
             (() => {
                 const msalConfig = {
                     auth: {
-                        clientId: '<your client ID here>',
+                        clientId: '39b7055a-95f6-4d40-a87f-c66c543d81fe',//'<your client ID here>',
                         redirectUri: 'http://localhost:8080'
                     }
                 };
 
-                const msalRequest = { scopes: [ 'user.readx' ] }
+                const msalRequest = { scopes: [ 'user.read' ] }
 
                 //login popup
                 const msalClient = new msal.PublicClientApplication(msalConfig);
