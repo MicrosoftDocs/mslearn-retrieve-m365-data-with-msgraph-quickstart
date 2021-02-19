@@ -2,25 +2,30 @@
 <html lang="en">
 
 <head>
-    <title>JavaScript Microsoft Graph SPA</title>
-    <link rel="icon" href="data:;base64,="> <!-- Supress favicon error -->
+  <title>JavaScript Microsoft Graph SPA</title>
+  <link rel="icon" href="data:;base64,="> <!-- Suppress favicon error -->
 </head>
 
 <body>
-    <main id="main-container" role="main" class="container">
-        <script src="https://alcdn.msauth.net/browser/2.1.0/js/msal-browser.min.js"
-            integrity="sha384-EmYPwkfj+VVmL1brMS1h6jUztl4QMS8Qq8xlZNgIT/luzg7MAzDVrRa2JxbNmk/e"
-            crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/@microsoft/microsoft-graph-client/lib/graph-js-sdk.js"></script>
-        <script src="auth.js"></script>
-        <script src="graph.js"></script> 
-        <script src="ui.js"></script>       
-        <script>
-          (()=>{    
-              //call main function from ui.js        
-            displayProfile(); 
-          })();
-        </script>
+  <main id="main-container" role="main" class="container">
+    <div id="content" style="display: none;">
+      <h4>Welcome <span id="userName"></span></h4>
+      <p>Your email retrieved from Microsoft Graph is: <span id="userEmail"></span></p>
+    </div>
+    <a id="signin" onclick="signIn(); return false;" href="#">
+      <img src="ms-symbollockup_signin_light.png" alt="Sign in with Microsoft" />
+    </a>
+  </main>
+  <script src="https://alcdn.msauth.net/browser/2.1.0/js/msal-browser.min.js"
+    integrity="sha384-EmYPwkfj+VVmL1brMS1h6jUztl4QMS8Qq8xlZNgIT/luzg7MAzDVrRa2JxbNmk/e"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@microsoft/microsoft-graph-client/lib/graph-js-sdk.js"></script>
+  <script src="auth.js"></script>
+  <script src="graph.js"></script>
+  <script src="ui.js"></script>
+  <script>
+    displayProfile(); 
+  </script>
 </body>
 
 </html>

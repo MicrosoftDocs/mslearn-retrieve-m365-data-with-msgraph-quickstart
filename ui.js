@@ -1,20 +1,17 @@
-function displayProfile(user){
-    const mainContainer = document.getElementById('main-container');
-    if (user) {                  
-        // Welcome the logged in user by name
-        var welcomeMessage = document.createElement('h4');
-        welcomeMessage.textContent = `Welcome ${user.displayName}!`;
-        var emailMessage = document.createElement('p');
-        emailMessage.textContent = `Your email retrieved from Microsoft Graph is: ${user.mail}!`;
-        mainContainer.innerHTML = '';
-        mainContainer.appendChild(welcomeMessage);
-        mainContainer.appendChild(emailMessage);
+function displayProfile(user) {    
+    if (!user) {
+        return;
     }
-    else {
-        // Show a sign in button 
-        var signInButton = document.createElement('button')
-        signInButton.innerHTML = "Click here to sign in";
-        signInButton.addEventListener("click", () => { signIn(); });
-        mainContainer.appendChild(signInButton);
-    }
+
+    // set user data
+    var userName = document.getElementById('userName');
+    userName.innerText = user.displayName;
+    var userEmail = document.getElementById('userEmail');
+    userEmail.innerText = user.mail;
+
+    // hide login button and show user info
+    var signInButton = document.getElementById('signin');
+    signInButton.style = "display: none";
+    var content = document.getElementById('content');
+    content.style = "display: block";
 }
