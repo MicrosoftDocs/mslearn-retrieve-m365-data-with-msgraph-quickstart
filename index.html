@@ -18,92 +18,96 @@
         <!-- Graph SDK -->
         <script src="https://cdn.jsdelivr.net/npm/@microsoft/microsoft-graph-client/lib/graph-js-sdk.js"></script>
         <script>
-            const msalConfig = {
-                auth: {
-                    clientId: '3dfb7052-ba39-4763-8237-851b3fe743fc',
-                    redirectUri: 'http://localhost:8080'
-                }
-            };
+            (() => {
+                const msalConfig = {
+                    auth: {
+                        clientId: '<your client ID here>',
+                        redirectUri: 'http://localhost:8080'
+                    }
+                };
 
-            const msalRequest = {
-                scopes: [
-                    'user.read'
-                ]
-            }
-            //login popup
-            const msalClient = new msal.PublicClientApplication(msalConfig);
-            async function signIn() {
-                const authResult = await msalClient.loginPopup(msalRequest);
-                sessionStorage.setItem('msalAccount', authResult.account.username);
-                // Get the user's profile from Graph
-                const user = await getUser();
-                // Save the profile in session storage
-                sessionStorage.setItem('graphUser', JSON.stringify(user));
-                showMe(user)
-            }
-            //Get token from Graph
-            async function getToken() {
-                let account = sessionStorage.getItem('msalAccount');
-                if (!account) {
-                    throw new Error(
-                        'User info cleared from session. Please sign out and sign in again.');
+                const msalRequest = {
+                    scopes: [
+                        'user.read'
+                    ]
                 }
-                try {
-                    // First, attempt to get the token silently
-                    const silentRequest = {
-                        scopes: msalRequest.scopes,
-                        account: msalClient.getAccountByUsername(account)
-                    };
+                //login popup
+                const msalClient = new msal.PublicClientApplication(msalConfig);
+                async function signIn() {
+                    const authResult = await msalClient.loginPopup(msalRequest);
+                    sessionStorage.setItem('msalAccount', authResult.account.username);
+                    // Get the user's profile from Graph
+                    const user = await getUser();
+                    // Save the profile in session storage
+                    sessionStorage.setItem('graphUser', JSON.stringify(user));
+                    showMe(user);
+                }
+                //Get token from Graph
+                async function getToken() {
+                    let account = sessionStorage.getItem('msalAccount');
+                    if (!account) {
+                        throw new Error(
+                            'User info cleared from session. Please sign out and sign in again.');
+                    }
+                    try {
+                        // First, attempt to get the token silently
+                        const silentRequest = {
+                            scopes: msalRequest.scopes,
+                            account: msalClient.getAccountByUsername(account)
+                        };
 
-                    const silentResult = await msalClient.acquireTokenSilent(silentRequest);
-                    return silentResult.accessToken;
-                } catch (silentError) {
-                    // If silent requests fails with InteractionRequiredAuthError,
-                    // attempt to get the token interactively
-                    if (silentError instanceof msal.InteractionRequiredAuthError) {
-                        const interactiveResult = await msalClient.acquireTokenPopup(msalRequest);
-                        return interactiveResult.accessToken;
-                    } else {
-                        throw silentError;
+                        const silentResult = await msalClient.acquireTokenSilent(silentRequest);
+                        return silentResult.accessToken;
+                    } catch (silentError) {
+                        // If silent requests fails with InteractionRequiredAuthError,
+                        // attempt to get the token interactively
+                        if (silentError instanceof msal.InteractionRequiredAuthError) {
+                            const interactiveResult = await msalClient.acquireTokenPopup(msalRequest);
+                            return interactiveResult.accessToken;
+                        } else {
+                            throw silentError;
+                        }
                     }
                 }
-            }
-            // Create an authentication provider
-            const authProvider = {
-                getAccessToken: async () => {
-                    // Call getToken in auth.js
-                    return await getToken();
+                // Create an authentication provider
+                const authProvider = {
+                    getAccessToken: async () => {
+                        // Call getToken in auth.js
+                        return await getToken();
+                    }
+                };
+                // Initialize the Graph client
+                const graphClient = MicrosoftGraph.Client.initWithMiddleware({ authProvider });
+                //Get user info from Graph
+                async function getUser() {
+                    return await graphClient
+                        .api('/me')
+                        // Only get the fields used by the app
+                        .select('id,displayName,mail,userPrincipalName')
+                        .get();
                 }
-            };
-            // Initialize the Graph client
-            const graphClient = MicrosoftGraph.Client.initWithMiddleware({ authProvider });
-            //Get user info from Graph
-            async function getUser() {
-                return await graphClient
-                    .api('/me')
-                    // Only get the fields used by the app
-                    .select('id,displayName,mail,userPrincipalName')
-                    .get();
-            }
-            //show my profile info
-            function showMe(user) {
-                const mainContainer = document.getElementById('main-container');
-                if (user) {
-                    // Welcome the user by name
-                    var welcomeMessage = document.createElement('h4');
-                    welcomeMessage.textContent = `Welcome ${user.displayName}!`;
-                    mainContainer.innerHTML = '';
-                    mainContainer.appendChild(welcomeMessage);
+                //show my profile info
+                function showMe(user) {
+                    const mainContainer = document.getElementById('main-container');
+                    if (user) {
+                        // Welcome the user by name
+                        var welcomeMessage = document.createElement('h4');
+                        welcomeMessage.textContent = `Welcome ${user.displayName}!`;
+                        mainContainer.innerHTML = '';
+                        mainContainer.appendChild(welcomeMessage);
+                    }
+                    else {
+                        // Show a sign in button 
+                        var signInButton = document.createElement('button')
+                        signInButton.innerHTML = "Click here to sign in";
+                        signInButton.addEventListener("click", () => { signIn(); });
+                        mainContainer.appendChild(signInButton);
+                    }
                 }
-                else {
-                    // Show a sign in button 
-                    var signInButton = document.createElement('button')
-                    signInButton.innerHTML = "Click here to sign in";
-                    signInButton.setAttribute('onclick', 'signIn();')
-                    mainContainer.appendChild(signInButton);
-                }
-            }
-            showMe()
+                showMe();
+            })();
+
         </script>
 </body>
+
 </html>
