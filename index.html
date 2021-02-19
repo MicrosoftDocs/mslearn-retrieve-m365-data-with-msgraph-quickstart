@@ -2,35 +2,28 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JavaScript Microsoft Graph SPA</title>
+    <link rel="icon" href="data:;base64,=">
 </head>
 
 <body>
     <main id="main-container" role="main" class="container">
-        <!-- MSAL -->
+
         <script src="https://alcdn.msauth.net/browser/2.1.0/js/msal-browser.min.js"
             integrity="sha384-EmYPwkfj+VVmL1brMS1h6jUztl4QMS8Qq8xlZNgIT/luzg7MAzDVrRa2JxbNmk/e"
             crossorigin="anonymous"></script>
-
-        <!-- Graph SDK -->
         <script src="https://cdn.jsdelivr.net/npm/@microsoft/microsoft-graph-client/lib/graph-js-sdk.js"></script>
         <script>
             (() => {
                 const msalConfig = {
                     auth: {
-                        clientId: '<your client ID here>',
+                        clientId: '39b7055a-95f6-4d40-a87f-c66c543d81fe',//'<your client ID here>',
                         redirectUri: 'http://localhost:8080'
                     }
                 };
 
-                const msalRequest = {
-                    scopes: [
-                        'user.read'
-                    ]
-                }
+                const msalRequest = { scopes: [ 'user.readx' ] }
+
                 //login popup
                 const msalClient = new msal.PublicClientApplication(msalConfig);
                 async function signIn() {
