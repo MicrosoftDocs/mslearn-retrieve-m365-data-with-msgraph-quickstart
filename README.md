@@ -6,6 +6,7 @@
 
 - [Node.js v14](https://nodejs.org/en/)
 - [CLI for Microsoft 365](https://aka.ms/cli-m365)
+- [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer)
 
 ### Create Azure AD
 
