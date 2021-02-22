@@ -5,9 +5,7 @@ function displayProfile(user) {
 
     // set user data
     var userName = document.getElementById('userName');
-    userName.innerText = user.displayName;
-    var userEmail = document.getElementById('userEmail');
-    userEmail.innerText = user.mail;
+    userName.innerText = user.displayName;  
 
     // hide login button and show user info
     var signInButton = document.getElementById('signin');

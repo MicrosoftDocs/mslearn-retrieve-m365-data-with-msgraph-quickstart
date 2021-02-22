@@ -12,6 +12,6 @@
     async function getUser() {
         return await graphClient
             .api('/me')
-            .select('id,displayName,mail')
+            .select('id,displayName')
             .get();
     }
