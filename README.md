@@ -22,7 +22,7 @@ You could do it manually in the [Azure Portal](https://portal.azure.com/).
 - copy the value of the `Application (client) ID` of the newly registered application from Azure Portal. You can get this from the overview page of the newly registered application.
 - in the `auth.js` file, on line 4, replace the value of the `clientId` property with the copied `Application (client) ID`
 - Copying the value of the `Directory (tenant) ID` of the newly registered application from Azure Portal. You can get this from the overview page of the newly registered application.
-- in the `auth.js` file, on line 6, replace the value of the `authority` property with the ID of your Azure AD, eg `https://login.microsoftonline.com/0be187e2-aa5c-464a-bc8b-74b0416b4c3a`, since this is a single tenant application.
+- in the `auth.js` file, on line 6, replace the value of the `authority` property with the `Directory (tenant) ID` copied in above step, eg `https://login.microsoftonline.com/0be187e2-aa5c-464a-bc8b-74b0416b4c3a`, since this is a single tenant application.
 - In case you created a multi-tenant application then comment out line 6 in `auth.js`. You don't need to pass the authority.
 
 ### Run the app
