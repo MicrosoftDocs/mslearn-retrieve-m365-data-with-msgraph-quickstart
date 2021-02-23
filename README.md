@@ -9,25 +9,13 @@
 ### Register Azure AD APP
 
 You have to register an application in Azure Active Directory in order to run this application.
-You could either do it manually in the [Azure Portal](https://portal.azure.com/) or choose a community driven open source tool like [CLI for Microsoft 365](https://aka.ms/cli-m365).
+You could do it manually in the [Azure Portal](https://portal.azure.com/).
 
 #### Register AAD app Manually in Azure Portal
 
 1. [Register a new application](https://docs.microsoft.com/en-gb/azure/active-directory/develop/scenario-spa-app-registration) in the [Azure Portal](https://portal.azure.com/).
 1. Ensure that the application is enabled for the [authorization code flow with PKCE](https://docs.microsoft.com/en-gb/azure/active-directory/develop/v2-oauth2-auth-code-flow). This will require that you redirect URI configured in the portal is of type SPA.
 1. For this sample we will create a [single tenant application](https://docs.microsoft.com/en-us/azure/active-directory/develop/single-and-multi-tenant-apps)
-
-#### Register AAD app with automated scripts using CLI for Microsoft 365
-
-- Install [CLI for Microsoft 365](https://aka.ms/cli-m365)
-- open command line
-- using CLI for Microsoft 365, sign in to your tenant by executing: `m365 login` and follow the instructions
-- when prompted, consent to the requested permissions
-- using CLI for Microsoft 365 create the Azure AD app by executing
-
-  ```command
-  m365 aad app add --name 'My app' --platform spa --redirectUris 'http://localhost' --apisDelegated 'https://graph.microsoft.com/User.Read'
-  ```
 
 ### Configure the sample
 
@@ -39,10 +27,10 @@ You could either do it manually in the [Azure Portal](https://portal.azure.com/)
 
 ### Run the app
 
-You can either use [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) if you are familiar with the extension or run below command to run the application in the browser. The application will open in the port `8080` of localhost by default for npx. The Live Server settings can be found in the project.
+Run below command in the command line after moving to project folder to run the application in browser. The application will open in the port `8080` of localhost by default for npx. The option `-c-1` disables any caching.
 
 ```nodejs
-npx http-server
+npx http-server -c-1
 ```
 
 ![Working app](./images/working-app.GIF)
