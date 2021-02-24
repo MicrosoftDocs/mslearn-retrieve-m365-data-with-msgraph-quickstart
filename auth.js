@@ -18,8 +18,9 @@ async function signIn() {
     // Get the user's profile from Graph
     const user = await getUser();
     // Save the profile in session storage
-    sessionStorage.setItem('graphUser', JSON.stringify(user));   
-    displayProfile(user);
+    sessionStorage.setItem('graphUser', JSON.stringify(user));  
+    //display name of the user
+    displayProfile(user);  
 }
 //Get token from Graph
 async function getToken() {
