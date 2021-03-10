@@ -7,20 +7,19 @@ const msalConfig = {
         redirectUri: 'http://localhost:8080'
     }
 };
-const msalRequest = { scopes: ['user.read'] };
-
+const msalRequest = { scopes: [] };
+function ensureScope (scope) {
+    if (!msalRequest.scopes.some((s) => s.toLowerCase() === scope.toLowerCase())) {
+        msalRequest.scopes.push(scope);
+    }
+}
 //Initialize MSAL client
 const msalClient = new msal.PublicClientApplication(msalConfig);
 
+// Log the user in
 async function signIn() {
     const authResult = await msalClient.loginPopup(msalRequest);
     sessionStorage.setItem('msalAccount', authResult.account.username);
-    // Get the user's profile from Graph
-    const user = await getUser();
-    // Save the profile in session storage
-    sessionStorage.setItem('graphUser', JSON.stringify(user));  
-    //display name of the user
-    displayProfile(user);  
 }
 //Get token from Graph
 async function getToken() {

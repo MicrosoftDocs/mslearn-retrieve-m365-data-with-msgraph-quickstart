@@ -1,13 +1,12 @@
-function displayProfile(user) {    
-    if (!user) {
-        return;
-    }
+async function displayUI() {    
+    await signIn();
 
-    // set user data
+    // Display info from user profile
+    const user = await getUser();
     var userName = document.getElementById('userName');
     userName.innerText = user.displayName;  
 
-    // hide login button and show user info
+    // Hide login button and initial UI
     var signInButton = document.getElementById('signin');
     signInButton.style = "display: none";
     var content = document.getElementById('content');
