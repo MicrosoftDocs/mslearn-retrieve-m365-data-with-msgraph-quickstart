@@ -9,7 +9,13 @@
 <body>
   <main id="main-container" role="main" class="container">
     <div id="content" style="display: none;">
-      <h4>Welcome <span id="userName"></span></h4>     
+      <h4>Welcome <span id="userName"></span></h4>
+      <button onclick="displayEmail();">Show email</button>
+      <ul id="emails"></ul>
+      <div id="emailsPaging" style="display: none;">
+        <button id="emailsPagingPrevious" style="display: none;" onclick="page--; displayEmail();">&lt; Previous</button>
+        <button id="emailsPagingNext" onclick="page++; displayEmail();">Next &gt;</button>
+      </div>      
     </div>
     <a id="signin" onclick="displayUI(); return false;" href="#">
       <img src="./images/ms-symbollockup_signin_light.png" alt="Sign in with Microsoft" />
@@ -21,7 +27,7 @@
   <script src="https://cdn.jsdelivr.net/npm/@microsoft/microsoft-graph-client/lib/graph-js-sdk.js"></script>
   <script src="auth.js"></script>
   <script src="graph.js"></script>
-  <script src="ui.js"></script>  
+  <script src="ui.js"></script>
 </body>
 
 </html>
