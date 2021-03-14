@@ -16,20 +16,3 @@ async function getUser() {
         .get();
 }
 
-async function getEmails(page) {
-    ensureScope('mail.read');
-
-    var pageSize = 10;
-
-    var query = graphClient
-        .api('/me/messages')
-        .select('subject,receivedDateTime')
-        .orderby('receivedDateTime desc')
-        .top(pageSize);
-
-    if (page && page > 1) {
-        query.skip((page - 1) * pageSize);
-    }
-
-    return await query.get();
-}
