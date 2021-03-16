@@ -2,7 +2,7 @@
   "name": "mslearn-retrieve-m365-data-with-msgraph-quickstart",
   "version": "1.0.0",
   "scripts": {
-    "start": "npx http-server -c-1 -a localhost"
+    "start": "npx http-server -c-1 -a localhost -o"
   },
   "repository": {
     "type": "git",
