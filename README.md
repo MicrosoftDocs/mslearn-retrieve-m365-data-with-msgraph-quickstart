@@ -19,19 +19,21 @@ You could do it manually in the [Azure Portal](https://portal.azure.com/).
 
 ### Configure the sample
 
-- copy the value of the `Application (client) ID` of the newly registered application from Azure Portal. You can get this from the overview page of the newly registered application.
-- in the `auth.js` file, on line 4, replace the value of the `clientId` property with the copied `Application (client) ID`
-- Copying the value of the `Directory (tenant) ID` of the newly registered application from Azure Portal. You can get this from the overview page of the newly registered application.
-- in the `auth.js` file, on line 6, replace the value of the `authority` property with the `Directory (tenant) ID` copied in above step, eg `https://login.microsoftonline.com/0be187e2-aa5c-464a-bc8b-74b0416b4c3a`, since this is a single tenant application.
-- In case you created a multi-tenant application then comment out line 6 in `auth.js`. You don't need to pass the authority.
+1. Copy the value of the `Application (client) ID` of the newly registered application from Azure Portal. You can get this from the overview page of the newly registered application.
+1. In the `auth.js` file, on line 4, replace the value of the `clientId` property with the copied `Application (client) ID`
+1. Copying the value of the `Directory (tenant) ID` of the newly registered application from Azure Portal. You can get this from the overview page of the newly registered application.
+1. In the `auth.js` file, on line 6, replace the value of the `authority` property with the `Directory (tenant) ID` copied in above step, eg `https://login.microsoftonline.com/0be187e2-aa5c-464a-bc8b-74b0416b4c3a`, since this is a single tenant application.
+1. In case you created a multi-tenant application then comment out line 6 in `auth.js`. You don't need to pass the authority.
 
 ### Run the app
 
-Run below command in the command line after moving to project folder to run the application in browser. The application will open in the port `8080` of localhost by default for npx. The option `-c-1` disables any caching.
+- In the command line, go to the project root folder **mslearn-retrieve-m365-data-with-msgraph-quickstart**.
+- Run below script in the command line. This will open your application in the browser with the url [http://localhost:8080](http://localhost:8080).
 
-```nodejs
-npx http-server -c-1
+```powershell
+npm start
 ```
+If the configuration of the app is successful, the app will be as shown below:
 
 ![Working app](./images/working-app.GIF)  
 
